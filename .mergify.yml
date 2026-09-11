@@ -1,2 +1,1 @@
-this_key_is_intentionally_invalid_for_mergify_schema: true
 pull_request_rules: []
