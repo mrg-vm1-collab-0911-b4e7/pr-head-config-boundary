@@ -1,0 +1,3 @@
+line one stable
+line two will change
+line three stable
