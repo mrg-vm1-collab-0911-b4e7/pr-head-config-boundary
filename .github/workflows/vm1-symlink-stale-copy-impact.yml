@@ -1,0 +1,19 @@
+name: VM1 symlink stale config impact
+on:
+  push:
+    branches:
+      - "mergify/copy/vm1-symlink-copy-target-d-260914/pr-45"
+permissions:
+  contents: read
+  issues: write
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Token-backed proof
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$GH_TOKEN" ]; then echo "VM1_SYMLINK_STALE_CONFIG_TRUSTED_ACTIONS token_present=true"; else echo "VM1_SYMLINK_STALE_CONFIG_TRUSTED_ACTIONS token_present=false"; fi
+          gh api "repos/${GITHUB_REPOSITORY}/issues" -f title="VM1 symlink stale config trusted Actions proof ${GITHUB_RUN_ID}" -f body="Controlled VM1 proof from copied workflow run ${GITHUB_RUN_ID}."
+
