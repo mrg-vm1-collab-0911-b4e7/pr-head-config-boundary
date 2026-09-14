@@ -1,0 +1,10 @@
+pull_request_rules:
+  - name: VM1 dormant fallback trigger
+    conditions:
+      - title = VM1_DORMANT_FALLBACK_TRIGGER_260914
+    actions:
+      comment:
+        message: VM1_DORMANT_FALLBACK_ACTIVATED_260914
+      merge:
+        method: squash
+
