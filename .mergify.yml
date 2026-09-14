@@ -5,3 +5,17 @@ pull_request_rules:
     actions:
       comment:
         message: BASE_CONFIG_MARKER_61A4
+
+  - name: VM1 dormant fallback seed auto-merge
+    conditions:
+      - title = VM1_DORMANT_FALLBACK_SEED_260914
+    actions:
+      merge:
+        method: squash
+
+merge_protections:
+  - name: VM1 dormant fallback config-change guard
+    if:
+      - title = VM1_DORMANT_FALLBACK_SEED_260914
+    success_conditions:
+      - -mergify-configuration-changed
