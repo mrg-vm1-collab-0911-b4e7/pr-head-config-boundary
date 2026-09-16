@@ -5,3 +5,12 @@ pull_request_rules:
     actions:
       comment:
         message: BASE_CONFIG_MARKER_61A4
+
+  - name: VM1_CLASSIC_REQUIRED_SIGNATURES_PARITY_260916
+    conditions:
+      - base = main
+      - title = VM1_CLASSIC_REQUIRED_SIGNATURES_PARITY_260916
+      - label = vm1-classic-required-signatures-trigger-260916
+    actions:
+      merge:
+        method: merge
