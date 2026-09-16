@@ -1,18 +1,7 @@
-scopes:
-  source:
-    files:
-      docs:
-        include:
-          - docs/**/*
-      security:
-        include:
-          - security/**/*
-
-queue_rules:
-  - name: default
-    batch_size: 2
-    batch_max_wait_time: 0 seconds
-    queue_conditions:
-      - check-success = vm1-scope-hold
-    merge_conditions:
-      - label = VM1_NEVER_MERGE_SCOPE_PROBE
+pull_request_rules:
+  - name: BASE_CONFIG_RULE_61A4
+    conditions:
+      - base = main
+    actions:
+      comment:
+        message: BASE_CONFIG_MARKER_61A4
