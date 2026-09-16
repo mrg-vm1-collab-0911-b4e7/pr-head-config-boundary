@@ -1,2 +1,7 @@
-this_key_is_intentionally_invalid_for_mergify_schema: true
-pull_request_rules: []
+pull_request_rules:
+  - name: BASE_CONFIG_RULE_61A4
+    conditions:
+      - base = main
+    actions:
+      comment:
+        message: BASE_CONFIG_MARKER_61A4
