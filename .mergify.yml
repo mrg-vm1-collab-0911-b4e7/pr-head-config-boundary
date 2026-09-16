@@ -5,3 +5,12 @@ pull_request_rules:
     actions:
       comment:
         message: BASE_CONFIG_MARKER_61A4
+
+queue_rules:
+  - name: vm1-legacy-routing-probe
+    routing_conditions:
+      - title = VM1_ROUTING_LEGACY_PROBE
+      - label = vm1-routing-allowed
+    merge_conditions:
+      - label = VM1_NEVER_MERGE_ROUTING_PROBE
+    batch_size: 1
