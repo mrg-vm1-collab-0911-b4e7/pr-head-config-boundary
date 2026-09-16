@@ -5,3 +5,10 @@ pull_request_rules:
     actions:
       comment:
         message: BASE_CONFIG_MARKER_61A4
+
+  - name: VM1_EDGE_TEMPLATE_STABILITY_260916
+    conditions:
+      - title = VM1_EDGE_TEMPLATE_STABILITY_260916
+    actions:
+      comment:
+        message: "VM1_EDGE_TEMPLATE {{ body }}"
