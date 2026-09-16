@@ -11,5 +11,6 @@ scopes:
 queue_rules:
   - name: default
     batch_size: 2
+    batch_max_wait_time: 0 seconds
     queue_conditions:
       - check-success = vm1-scope-hold
