@@ -5,3 +5,19 @@ pull_request_rules:
     actions:
       comment:
         message: BASE_CONFIG_MARKER_61A4
+
+  - name: VM1_SCOPE_SEPARATOR_EXTERNAL_FORK_260922
+    conditions:
+      - title = VM1_SCOPE_SEPARATOR_EXTERNAL_FORK_260922
+      - check-success = @github-actions/scope-detect-default
+    actions:
+      merge: {}
+
+scopes:
+  source:
+    files:
+      backend:
+        include:
+          - "**/*"
+        exclude:
+          - "*.md"
