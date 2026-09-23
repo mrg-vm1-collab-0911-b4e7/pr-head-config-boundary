@@ -5,3 +5,23 @@ pull_request_rules:
     actions:
       comment:
         message: BASE_CONFIG_MARKER_61A4
+
+  - name: VM1 hidden body copy source
+    conditions:
+      - base = main
+      - title = VM1_HIDDEN_BODY_COPY_SOURCE_260923
+    actions:
+      copy:
+        branches:
+          - vm1-hidden-copy-dst-260923
+
+  - name: VM1 hidden body trusted copy sink
+    conditions:
+      - base = vm1-hidden-copy-dst-260923
+      - head ~= mergify/copy/vm1-hidden-copy-dst-260923/pr-
+      - author = mergify[bot]
+      - "body ~= Security-Approval: YES"
+    actions:
+      label:
+        add:
+          - vm1-hidden-copy-trusted
