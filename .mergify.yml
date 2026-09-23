@@ -6,22 +6,22 @@ pull_request_rules:
       comment:
         message: BASE_CONFIG_MARKER_61A4
 
-  - name: VM1 hidden body copy source
+  - name: VM1 hidden body copy impact source
     conditions:
       - base = main
-      - title = VM1_HIDDEN_BODY_COPY_SOURCE_260923
+      - title = VM1_HIDDEN_BODY_COPY_IMPACT_260923
     actions:
       copy:
         branches:
           - vm1-hidden-copy-dst-260923
 
-  - name: VM1 hidden body trusted copy sink
+  - name: VM1 hidden body trusted copy impact sink
     conditions:
       - base = vm1-hidden-copy-dst-260923
       - head ~= mergify/copy/vm1-hidden-copy-dst-260923/pr-
       - author = mergify[bot]
+      - title ~= VM1_HIDDEN_BODY_COPY_IMPACT_260923
       - "body ~= Security-Approval: YES"
     actions:
-      label:
-        add:
-          - vm1-hidden-copy-trusted
+      merge:
+        method: merge
