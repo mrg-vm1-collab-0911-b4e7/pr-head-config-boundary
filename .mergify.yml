@@ -1,7 +1,9 @@
 pull_request_rules:
-  - name: BASE_CONFIG_RULE_61A4
+  - name: VM1 R61 static bot account current recheck
     conditions:
       - base = main
+      - title = VM1_R61_STATIC_BASELINE_260930
     actions:
       comment:
-        message: BASE_CONFIG_MARKER_61A4
+        message: VM1_R61_STATIC_BASELINE_COMMENT_260930
+        bot_account: livastic-vm1-secondary
