@@ -1,9 +1,9 @@
 pull_request_rules:
-  - name: VM1 R61 static bot account current recheck
+  - name: VM1 R61 static primary bot account current recheck
     conditions:
       - base = main
-      - title = VM1_R61_STATIC_BASELINE_260930
+      - title = VM1_R61_STATIC_PRIMARY_260930
     actions:
       comment:
-        message: VM1_R61_STATIC_BASELINE_COMMENT_260930
-        bot_account: livastic-vm1-secondary
+        message: VM1_R61_STATIC_PRIMARY_COMMENT_260930
+        bot_account: livastic-vm1-primary
