@@ -6,10 +6,3 @@ pull_request_rules:
       comment:
         message: BASE_CONFIG_MARKER_61A4
 
-  - name: VM1_R46_CURRENT_260930
-    conditions:
-      - closed
-      - title = VM1_R46_CURRENT_260930
-    actions:
-      delete_head_branch:
-        force: false
