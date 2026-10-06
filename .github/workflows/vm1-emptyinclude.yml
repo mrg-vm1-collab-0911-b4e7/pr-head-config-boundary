@@ -1,0 +1,57 @@
+name: VM1 Empty Include Scope Gate 261006
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  detect-scopes:
+    runs-on: ubuntu-24.04
+    outputs:
+      scopes: ${{ steps.scopes.outputs.scopes }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - id: scopes
+        uses: Mergifyio/gha-mergify-ci@v26
+        with:
+          action: scopes
+          mergify_cli_version: 2026.10.1
+
+  control-security:
+    needs: detect-scopes
+    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_CONTROL_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['control-scope'] == true }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Controlled security gate
+        run: exit 41
+
+  treatment-security:
+    needs: detect-scopes
+    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_TREATMENT_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['treatment-scope'] == true }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Controlled security gate
+        run: exit 42
+
+  aggregate:
+    name: vm1-emptyinclude-ci-gate
+    if: ${{ always() }}
+    needs:
+      - detect-scopes
+      - control-security
+      - treatment-security
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Require detector success and no scope-specific failure
+        env:
+          DETECT: ${{ needs.detect-scopes.result }}
+          CONTROL: ${{ needs.control-security.result }}
+          TREATMENT: ${{ needs.treatment-security.result }}
+        run: |
+          printf 'detect=%s control=%s treatment=%s\n' "$DETECT" "$CONTROL" "$TREATMENT"
+          test "$DETECT" = success
+          test "$CONTROL" != failure
+          test "$TREATMENT" != failure
