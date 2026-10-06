@@ -1,15 +1,29 @@
+scopes:
+  source:
+    files:
+      control-scope: {}
+      treatment-scope:
+        include: []
+
 pull_request_rules:
-  - name: BASE_CONFIG_RULE_61A4
+  - name: VM1 empty include control 261006
     conditions:
       - base = main
+      - author = livastic-vm1-secondary
+      - title = VM1_EMPTY_INCLUDE_CONTROL_261006
+      - scope = control-scope
+      - check-success = @github-actions/vm1-emptyinclude-ci-gate
     actions:
-      comment:
-        message: BASE_CONFIG_MARKER_61A4
+      merge:
+        method: merge
 
-  - name: VM1_R46_CURRENT_260930
+  - name: VM1 empty include treatment 261006
     conditions:
-      - closed
-      - title = VM1_R46_CURRENT_260930
+      - base = main
+      - author = livastic-vm1-secondary
+      - title = VM1_EMPTY_INCLUDE_TREATMENT_261006
+      - scope = treatment-scope
+      - check-success = @github-actions/vm1-emptyinclude-ci-gate
     actions:
-      delete_head_branch:
-        force: false
+      merge:
+        method: merge
