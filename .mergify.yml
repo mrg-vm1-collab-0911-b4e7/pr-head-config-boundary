@@ -3,7 +3,7 @@ scopes:
     files:
       critical:
         include:
-          - "critical/**"
+          - "critical-*"
       ignored:
         include:
-          - "ignored/**"
+          - "ignored-*"
