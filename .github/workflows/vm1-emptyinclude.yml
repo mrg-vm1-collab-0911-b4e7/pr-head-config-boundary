@@ -1,9 +1,7 @@
-name: VM1 Empty Include Scope Gate 261006
+name: VM1 Hex Branch Scope Gate 261008
 
 on:
   pull_request:
-    branches:
-      - main
 
 jobs:
   detect-scopes:
@@ -18,40 +16,30 @@ jobs:
         uses: Mergifyio/gha-mergify-ci@v26
         with:
           action: scopes
-          mergify_cli_version: 2026.10.1
+          base: ${{ github.base_ref }}
+          mergify_cli_version: 2026.10.3
 
-  control-security:
+  critical-security:
     needs: detect-scopes
-    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_CONTROL_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['control-scope'] == true }}
+    if: ${{ fromJSON(needs.detect-scopes.outputs.scopes)['critical'] == true }}
     runs-on: ubuntu-24.04
     steps:
-      - name: Controlled security gate
+      - name: Controlled critical gate
         run: exit 41
 
-  treatment-security:
-    needs: detect-scopes
-    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_TREATMENT_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['treatment-scope'] == true }}
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Controlled security gate
-        run: exit 42
-
   aggregate:
-    name: vm1-emptyinclude-ci-gate
+    name: vm1-hex-branch-gate
     if: ${{ always() }}
     needs:
       - detect-scopes
-      - control-security
-      - treatment-security
+      - critical-security
     runs-on: ubuntu-24.04
     steps:
-      - name: Require detector success and no scope-specific failure
+      - name: Require detector success and no critical-scope failure
         env:
           DETECT: ${{ needs.detect-scopes.result }}
-          CONTROL: ${{ needs.control-security.result }}
-          TREATMENT: ${{ needs.treatment-security.result }}
+          CRITICAL: ${{ needs.critical-security.result }}
         run: |
-          printf 'detect=%s control=%s treatment=%s\n' "$DETECT" "$CONTROL" "$TREATMENT"
+          printf 'detect=%s critical=%s\n' "$DETECT" "$CRITICAL"
           test "$DETECT" = success
-          test "$CONTROL" != failure
-          test "$TREATMENT" != failure
+          test "$CRITICAL" != failure
