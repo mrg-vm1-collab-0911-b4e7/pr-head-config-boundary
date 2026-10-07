@@ -1,29 +1,9 @@
 scopes:
   source:
     files:
-      control-scope: {}
-      treatment-scope:
-        include: []
-
-pull_request_rules:
-  - name: VM1 empty include control 261006
-    conditions:
-      - base = main
-      - author = livastic-vm1-secondary
-      - title = VM1_EMPTY_INCLUDE_CONTROL_261006
-      - scope = control-scope
-      - check-success = @github-actions/vm1-emptyinclude-ci-gate
-    actions:
-      merge:
-        method: merge
-
-  - name: VM1 empty include treatment 261006
-    conditions:
-      - base = main
-      - author = livastic-vm1-secondary
-      - title = VM1_EMPTY_INCLUDE_TREATMENT_261006
-      - scope = treatment-scope
-      - check-success = @github-actions/vm1-emptyinclude-ci-gate
-    actions:
-      merge:
-        method: merge
+      critical:
+        include:
+          - "critical/**"
+      ignored:
+        include:
+          - "ignored/**"
