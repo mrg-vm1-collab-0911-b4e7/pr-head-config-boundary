@@ -27,17 +27,3 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-
-queue_rules:
-  - name: vm1-pythonstruct-261013
-    queue_conditions:
-      - base = vm1-pythonstruct-base-261013
-      - title ~= ^VM1_PYSTRUCT_(A|B)_261013$
-    autoqueue: true
-    batch_size: 2
-    merge_method: merge-batch
-    batch_max_wait_time: 20
-conflict_resolvers:
-  - paths:
-      - sandbox/structural.py
-    strategy: python
