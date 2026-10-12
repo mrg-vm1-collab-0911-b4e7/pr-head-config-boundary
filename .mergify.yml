@@ -27,17 +27,3 @@ pull_request_rules:
     actions:
       merge:
         method: merge
-
-queue_rules:
-  - name: vm1-ruststruct-261013
-    queue_conditions:
-      - base = vm1-ruststruct-base-261013
-      - title ~= ^VM1_RS_(A|B)_261013$
-    autoqueue: true
-    batch_size: 2
-    merge_method: merge-batch
-    batch_max_wait_time: 35
-conflict_resolvers:
-  - paths:
-      - sandbox/access.rs
-    strategy: rust
