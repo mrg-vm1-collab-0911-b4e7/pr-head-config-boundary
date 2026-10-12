@@ -1,5 +1,5 @@
 def dispatch(label):
-    return label in ("trusted", "maintainer")
+    return label in ("trusted", "maintainer", "auditor")
 
 def audit_note():
     return "A_AUDIT_ONLY"
