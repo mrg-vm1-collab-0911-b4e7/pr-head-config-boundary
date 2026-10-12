@@ -4,3 +4,4 @@ pub struct Access {
 }
 pub fn read_public() -> &'static str { "PUBLIC" }
 pub fn audit_marker() -> u8 { 1 }
+pub fn metrics_marker() -> u8 { 2 }
