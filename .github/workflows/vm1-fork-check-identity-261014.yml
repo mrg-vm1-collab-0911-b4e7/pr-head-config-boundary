@@ -12,3 +12,9 @@ jobs:
     steps:
       - name: Harmless identity marker
         run: echo VM1_FORK_GHA_CHECK_IDENTITY_261014_Z3M8
+
+  fork-origin-only:
+    name: vm1-fork-only-proof-z3m8
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo VM1_B_FORK_ONLY_CHECK_261014_Z3M8
