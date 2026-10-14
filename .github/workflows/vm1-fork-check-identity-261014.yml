@@ -1,0 +1,14 @@
+name: VM1 Fork Check Identity Fixture Z3M8
+on:
+  push:
+    branches:
+      - vm1-check-origin-fork-261014-z3m8
+permissions:
+  contents: read
+jobs:
+  fork-identity:
+    name: vm1-emptyinclude-ci-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harmless identity marker
+        run: echo VM1_FORK_GHA_CHECK_IDENTITY_261014_Z3M8
