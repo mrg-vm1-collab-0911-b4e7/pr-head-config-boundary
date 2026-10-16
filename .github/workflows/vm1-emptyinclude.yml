@@ -22,7 +22,7 @@ jobs:
 
   control-security:
     needs: detect-scopes
-    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_CONTROL_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['control-scope'] == true }}
+    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_CONTROL_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['control-scope'] == 'true' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Controlled security gate
@@ -30,7 +30,7 @@ jobs:
 
   treatment-security:
     needs: detect-scopes
-    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_TREATMENT_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['treatment-scope'] == true }}
+    if: ${{ github.event.pull_request.title == 'VM1_EMPTY_INCLUDE_TREATMENT_261006' && fromJSON(needs.detect-scopes.outputs.scopes)['treatment-scope'] == 'true' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Controlled security gate
