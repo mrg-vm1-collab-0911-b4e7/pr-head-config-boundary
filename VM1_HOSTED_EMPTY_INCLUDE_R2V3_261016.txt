@@ -1,1 +1,2 @@
 VM1 inert text; no executable code or secrets
+VM1: trigger trusted fixed-comparator CI rerun, inert-only
